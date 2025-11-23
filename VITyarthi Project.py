@@ -3,7 +3,7 @@ import csv
 import datetime
 
 f='expenses.csv'
-
+#Fucntion to open csv file
 def load_expenses():
     expenses=[]
     try:
@@ -15,7 +15,7 @@ def load_expenses():
     except FileNotFoundError:
         pass
     return expenses
-
+#Function save input data to the csv file 
 def save_expenses(expenses):
     with open(f,'w',newline='') as csvfile:
         fieldnames=['date','amount','category','note']
@@ -23,7 +23,7 @@ def save_expenses(expenses):
         writer.writeheader()
         for expense in expenses:
             writer.writerow(expense)
-
+#Function to input expense data
 def add_expense(expenses):
     date=input('Enter date(YYYY-MM-DD) OR Leave blank for today:')
     if not date:
@@ -34,7 +34,7 @@ def add_expense(expenses):
     expense={'Date':date,'Amount':amount,'Category':category,'Note':note}
     expenses.append(expense)
     print('Expense added')
-
+#Function to view the stored data from the csv file
 def view_expenses(expenses):
     if not expenses:
         print('No expenses recorded')
@@ -43,8 +43,8 @@ def view_expenses(expenses):
     print('-'*50)
     for exp in expenses:
         print(f"{exp['Date']:<12}{exp['Amount']:<10.2f}{exp['Category']:<15}{exp['Note']}")
-        
-        
+
+#Function to plot and visualize expenses categorically 
 def plot_expenses(expenses):
     if not expenses:
         print('No expenses to plot')
@@ -63,7 +63,7 @@ def plot_expenses(expenses):
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.show()
-
+#Command Line Main menu 
 def menu():
     expenses=load_expenses()
     while True:
@@ -89,3 +89,4 @@ if __name__=='__main__':
     menu()
         
     
+
