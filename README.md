@@ -71,3 +71,20 @@
 * ###### View the expenses list to verify if data is being correctly recorded or not 
 * ###### Select option to display graph of expenses to check the correctness of the bar graph
 * ###### Exit the program to save the data in the csv file and re-run the program to ensure if the previous data was saved correctly or not
+
+  Screenshot
+  Command Line interface
+
+  <img width="344" height="247" alt="image" src="https://github.com/user-attachments/assets/72375efc-ae70-4d0e-9274-32a014e8feb4" />
+
+  Working
+
+  <img width="1090" height="1153" alt="image" src="https://github.com/user-attachments/assets/2267ff63-d8b2-4a9d-a834-b39434fbf849" />
+
+  <img width="977" height="402" alt="image" src="https://github.com/user-attachments/assets/38dc0ad3-ecfc-47c7-baa0-4827bdc22dff" />
+
+  <img width="1090" height="822" alt="image" src="https://github.com/user-attachments/assets/7095fb42-2f6c-478e-b10d-e5665fa06fea" />
+  
+
+
+
