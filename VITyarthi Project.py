@@ -25,12 +25,12 @@ def save_expenses(expenses):
             writer.writerow(expense)
 #Function to input expense data
 def add_expense(expenses):
-    date=input('Enter date(YYYY-MM-DD) OR Leave blank for today:')
+    date=input('Enter date(YYYY-MM-DD) OR Leave blank for today: ')
     if not date:
         date=datetime.date.today().isoformat()
-    amount=float(input('Enter amount:'))
-    category=input('Enter Category')
-    note=input('Enter note')
+    amount=float(input('Enter amount: '))
+    category=input('Enter Category: ')
+    note=input('Enter note: ')
     expense={'Date':date,'Amount':amount,'Category':category,'Note':note}
     expenses.append(expense)
     print('Expense added')
@@ -89,4 +89,5 @@ if __name__=='__main__':
     menu()
         
     
+
 
