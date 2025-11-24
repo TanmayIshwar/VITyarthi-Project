@@ -10,7 +10,7 @@ def load_expenses():
         with open(f,newline='') as csvfile:
             reader=csv.DictReader(csvfile)
             for row in reader:
-                row['amount']=float(row['amount'])
+                row['Amount']=float(row['Amount'])
                 expenses.append(row)
     except FileNotFoundError:
         pass
@@ -18,7 +18,7 @@ def load_expenses():
 #Function save input data to the csv file 
 def save_expenses(expenses):
     with open(f,'w',newline='') as csvfile:
-        fieldnames=['date','amount','category','note']
+        fieldnames=['Date','Amount','Category','Note']
         writer=csv.DictWriter(csvfile,fieldnames=fieldnames)
         writer.writeheader()
         for expense in expenses:
@@ -89,5 +89,6 @@ if __name__=='__main__':
     menu()
         
     
+
 
 
