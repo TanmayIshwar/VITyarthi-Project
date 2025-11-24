@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import csv
 import datetime
+import numpy as np
 
 f='expenses.csv'
 #Fucntion to open csv file
@@ -91,6 +92,7 @@ if __name__=='__main__':
     menu()
         
     
+
 
 
 
