@@ -49,18 +49,20 @@ def plot_expenses(expenses):
     if not expenses:
         print('No expenses to plot')
         return
-    category_totals={}
+    category_totals = {}
     for exp in expenses:
-        category=exp['Category']
-        category_totals['Category']=category_totals.get(category,0)+exp['Amount']
-    categories=list(category_totals.keys())
-    amounts=list(category_totals.values())
-    plt.figure(figsize=(8,6))
-    plt.bar(categories,amounts,color='skyblue')
+        category = exp['Category']
+        category_totals[category] = category_totals.get(category, 0) + exp['Amount']
+    categories = list(category_totals.keys())
+    amounts = list(category_totals.values())
+    x_pos = np.arange(len(categories))
+
+    plt.figure(figsize=(8, 6))
+    plt.bar(x_pos, amounts, color='skyblue')
     plt.xlabel('Category')
     plt.ylabel('Total Amount')
     plt.title('Expenses by Category')
-    plt.xticks(rotation=45)
+    plt.xticks(x_pos, categories, rotation=45)
     plt.tight_layout()
     plt.show()
 #Command Line Main menu 
@@ -89,6 +91,7 @@ if __name__=='__main__':
     menu()
         
     
+
 
 
 
