@@ -2,50 +2,74 @@ import matplotlib.pyplot as plt
 import csv
 import datetime
 import numpy as np
+import os
 
-f='expenses.csv'
-#Fucntion to open csv file
+f = 'expenses.csv'
+
+# Function to load expenses from the CSV file
 def load_expenses():
-    expenses=[]
+    expenses = []
     try:
-        with open(f,newline='') as csvfile:
-            reader=csv.DictReader(csvfile)
+        print(f"Attempting to load expenses from {f}...")
+        with open(f, newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
             for row in reader:
-                row['Amount']=float(row['Amount'])
-                expenses.append(row)
+                try:
+                    row['Amount'] = float(row['Amount'])  # Convert 'Amount' to float
+                    expenses.append(row)
+                except ValueError as e:
+                    print(f"Skipping row due to invalid amount value: {row}")
+                    continue  # Skip malformed rows
+        print(f"Loaded {len(expenses)} expense(s).")
     except FileNotFoundError:
-        pass
+        print(f"File {f} not found. Returning an empty list.")
     return expenses
-#Function save input data to the csv file 
+
+# Function to save expenses to the CSV file
 def save_expenses(expenses):
-    with open(f,'w',newline='') as csvfile:
-        fieldnames=['Date','Amount','Category','Note']
-        writer=csv.DictWriter(csvfile,fieldnames=fieldnames)
-        writer.writeheader()
+    print(f"Saving {len(expenses)} expense(s) to {f}...")
+    with open(f, 'w', newline='') as csvfile:
+        fieldnames = ['Date', 'Amount', 'Category', 'Note']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        
+        writer.writeheader()  # Write the header row
         for expense in expenses:
             writer.writerow(expense)
-#Function to input expense data
+    print("Expenses saved successfully.")
+
+# Function to get valid float input (used for amount)
+def get_float_input(prompt):
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+
+# Function to add an expense
 def add_expense(expenses):
-    date=input('Enter date(YYYY-MM-DD) OR Leave blank for today: ')
+    date = input('Enter date (YYYY-MM-DD) OR Leave blank for today: ')
     if not date:
-        date=datetime.date.today().isoformat()
-    amount=float(input('Enter amount: '))
-    category=input('Enter Category: ')
-    note=input('Enter note: ')
-    expense={'Date':date,'Amount':amount,'Category':category,'Note':note}
+        date = datetime.date.today().isoformat()
+    amount = get_float_input('Enter amount: ')  # Use the function to get valid float input
+    category = input('Enter Category: ')
+    note = input('Enter note: ')
+    
+    expense = {'Date': date, 'Amount': amount, 'Category': category, 'Note': note}
     expenses.append(expense)
-    print('Expense added')
-#Function to view the stored data from the csv file
+    
+    print(f"Expense added: {expense}")
+
+# Function to view the stored expenses
 def view_expenses(expenses):
     if not expenses:
         print('No expenses recorded')
         return
-    print(f"{'Date':,12}{'Amount':<10}{'Category':<15}{'Note'}")
-    print('-'*50)
+    print(f"{'Date':<12}{'Amount':<10}{'Category':<15}{'Note'}")
+    print('-' * 50)
     for exp in expenses:
         print(f"{exp['Date']:<12}{exp['Amount']:<10.2f}{exp['Category']:<15}{exp['Note']}")
 
-#Function to plot and visualize expenses categorically 
+# Function to plot expenses by category
 def plot_expenses(expenses):
     if not expenses:
         print('No expenses to plot')
@@ -66,9 +90,10 @@ def plot_expenses(expenses):
     plt.xticks(x_pos, categories, rotation=45)
     plt.tight_layout()
     plt.show()
-#Command Line Main menu 
+
+# Main menu function
 def menu():
-    expenses=load_expenses()
+    expenses = load_expenses()
     while True:
         print("Expense Tracker")
         print("1. Add Expense")
@@ -88,10 +113,12 @@ def menu():
             break
         else:
             print("Invalid option. Please choose again.")
-if __name__=='__main__':
+
+if __name__ == '__main__':
     menu()
         
     
+
 
 
 
